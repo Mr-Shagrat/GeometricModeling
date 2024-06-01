@@ -27,9 +27,8 @@ namespace GeometricModeling
         private Vector currentPosition;
         private Vector firstPoint;
         private int ClickNum = 1;
-        private int DrawIndex = -1;
         private bool active_drawing = false;
-
+        private Pen pen = new Pen(Color.Black, 0);
         //Эвент на движения курсора по рабочей области и отображение в label1 значение курсора по Х и У
         private void drawing_MouseMove(object sender, MouseEventArgs e)
         {
@@ -65,13 +64,6 @@ namespace GeometricModeling
         {
             if (e.Button == MouseButtons.Left && active_drawing)
             {
-                switch (DrawIndex)
-                {
-
-                    case 0: //point
-                        points.Add(new Entities.Point(currentPosition));
-                        break;
-                    case 1: //line
                         switch (ClickNum)
                         {
                             case 1:
@@ -79,12 +71,10 @@ namespace GeometricModeling
                                 ClickNum++;
                                 break;
                             case 2:
-                                lines.Add(new Entities.Line(firstPoint, currentPosition));
+                                lines.Add(new Entities.Line(firstPoint, currentPosition, pen));
                                 firstPoint = currentPosition;
                                 break;
                         }
-                        break;
-                }
                 drawing.Refresh();
 
             }
@@ -97,57 +87,56 @@ namespace GeometricModeling
 
             e.Graphics.SetParameters(Pixel_to_Mn(drawing.Height));
 
-            //point
-            if (points.Count > 0)
-            {
-                foreach(Entities.Point p in points)
-                {
-                    e.Graphics.DrawPoint(new Pen(Color.Red), p);
-                }
-            }
-
             //line
             if (lines.Count > 0)
             {
                 foreach (Entities.Line l in lines)
                 {
-                    e.Graphics.DrawLine(new Pen(Color.Green), l);
+                    e.Graphics.DrawLine(l.Pen, l);
                 }
             }
 
             //lines 
-            switch(DrawIndex)
-            {
-                case 1:
+
                     if (ClickNum == 2)
                     {
-                        Entities.Line line = new Entities.Line(firstPoint, currentPosition);
+                        Entities.Line line = new Entities.Line(firstPoint, currentPosition, pen);
                         e.Graphics.DrawLine(extpen, line);
                     }
-                    break;
-            }
-        }
-
-        private void pointBtn_Click(object sender, EventArgs e)
-        {
-            DrawIndex = 0;
-            active_drawing = true;
-            drawing.Cursor = Cursors.Cross;
-        }
-
-        private void lineBtn_Click(object sender, EventArgs e)
-        {
-            DrawIndex = 1;
-            active_drawing = true;
-            drawing.Cursor = Cursors.Cross;
+       
         }
 
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DrawIndex = -1;
             active_drawing = false;
             drawing.Cursor = Cursors.Default;
             ClickNum = 1;
+        }
+
+        private void straightLine_Click(object sender, EventArgs e)
+        {
+            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+        }
+
+        private void dashLine_Click(object sender, EventArgs e)
+        {
+            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+        }
+
+        private void dashDotLine_Click(object sender, EventArgs e)
+        {
+            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
+        }
+
+        private void dashDotDotLine_Click(object sender, EventArgs e)
+        {
+            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+        }
+
+        private void lineBtn_Click(object sender, EventArgs e)
+        {
+            active_drawing = true;
+            drawing.Cursor = Cursors.Cross;
         }
     }
 }
