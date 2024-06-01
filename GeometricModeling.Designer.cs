@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeometricModeling));
             this.drawing = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.отменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ribbon1 = new System.Windows.Forms.Ribbon();
@@ -54,8 +52,16 @@
             this.defaultWeight = new System.Windows.Forms.RibbonButton();
             this.halfBoldWeight = new System.Windows.Forms.RibbonButton();
             this.boldWeight = new System.Windows.Forms.RibbonButton();
+            this.zoomPanel = new System.Windows.Forms.RibbonPanel();
+            this.zoomIn = new System.Windows.Forms.RibbonButton();
+            this.zoomOut = new System.Windows.Forms.RibbonButton();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.coordinate = new System.Windows.Forms.ToolStripStatusLabel();
+            this.vScrollBar = new System.Windows.Forms.VScrollBar();
+            this.hScrollBar = new System.Windows.Forms.HScrollBar();
             ((System.ComponentModel.ISupportInitialize)(this.drawing)).BeginInit();
             this.menuStrip.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // drawing
@@ -65,31 +71,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.drawing.BackColor = System.Drawing.SystemColors.Window;
             this.drawing.Location = new System.Drawing.Point(0, 148);
+            this.drawing.Margin = new System.Windows.Forms.Padding(0);
             this.drawing.Name = "drawing";
-            this.drawing.Size = new System.Drawing.Size(2063, 1000);
+            this.drawing.Size = new System.Drawing.Size(2037, 929);
             this.drawing.TabIndex = 0;
             this.drawing.TabStop = false;
             this.drawing.Paint += new System.Windows.Forms.PaintEventHandler(this.drawing_Paint);
             this.drawing.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawing_MouseDown);
             this.drawing.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawing_MouseMove);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 841);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 29);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 883);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 29);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
             // 
             // menuStrip
             // 
@@ -157,6 +146,7 @@
             // 
             this.ribbonTab1.Name = "ribbonTab1";
             this.ribbonTab1.Panels.Add(this.drawPanel);
+            this.ribbonTab1.Panels.Add(this.zoomPanel);
             this.ribbonTab1.Text = "";
             // 
             // drawPanel
@@ -308,15 +298,85 @@
             this.boldWeight.Text = "Жирная линия";
             this.boldWeight.Click += new System.EventHandler(this.boldWeight_Click);
             // 
+            // zoomPanel
+            // 
+            this.zoomPanel.ButtonMoreVisible = false;
+            this.zoomPanel.Items.Add(this.zoomIn);
+            this.zoomPanel.Items.Add(this.zoomOut);
+            this.zoomPanel.Name = "zoomPanel";
+            this.zoomPanel.Text = "";
+            // 
+            // zoomIn
+            // 
+            this.zoomIn.Image = ((System.Drawing.Image)(resources.GetObject("zoomIn.Image")));
+            this.zoomIn.LargeImage = ((System.Drawing.Image)(resources.GetObject("zoomIn.LargeImage")));
+            this.zoomIn.Name = "zoomIn";
+            this.zoomIn.SmallImage = ((System.Drawing.Image)(resources.GetObject("zoomIn.SmallImage")));
+            this.zoomIn.Text = "Отдалить";
+            this.zoomIn.Click += new System.EventHandler(this.ZoomBtn_Click);
+            // 
+            // zoomOut
+            // 
+            this.zoomOut.Image = ((System.Drawing.Image)(resources.GetObject("zoomOut.Image")));
+            this.zoomOut.LargeImage = ((System.Drawing.Image)(resources.GetObject("zoomOut.LargeImage")));
+            this.zoomOut.Name = "zoomOut";
+            this.zoomOut.SmallImage = ((System.Drawing.Image)(resources.GetObject("zoomOut.SmallImage")));
+            this.zoomOut.Text = "Приблизить";
+            this.zoomOut.Click += new System.EventHandler(this.ZoomBtn_Click);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.coordinate});
+            this.statusStrip.Location = new System.Drawing.Point(0, 1106);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(2063, 40);
+            this.statusStrip.TabIndex = 6;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // coordinate
+            // 
+            this.coordinate.AutoSize = false;
+            this.coordinate.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.coordinate.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+            this.coordinate.Name = "coordinate";
+            this.coordinate.Size = new System.Drawing.Size(250, 33);
+            this.coordinate.Text = "0.000, 0.000, 0.000";
+            // 
+            // vScrollBar
+            // 
+            this.vScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.vScrollBar.Location = new System.Drawing.Point(2037, 148);
+            this.vScrollBar.Name = "vScrollBar";
+            this.vScrollBar.Size = new System.Drawing.Size(26, 929);
+            this.vScrollBar.TabIndex = 7;
+            this.vScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar_Scroll);
+            // 
+            // hScrollBar
+            // 
+            this.hScrollBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hScrollBar.Location = new System.Drawing.Point(0, 1080);
+            this.hScrollBar.Name = "hScrollBar";
+            this.hScrollBar.Size = new System.Drawing.Size(2037, 26);
+            this.hScrollBar.TabIndex = 8;
+            this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar_Scroll);
+            // 
             // GeometricModeling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2063, 1146);
             this.ContextMenuStrip = this.menuStrip;
+            this.Controls.Add(this.hScrollBar);
+            this.Controls.Add(this.vScrollBar);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.ribbon1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.drawing);
             this.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.KeyPreview = true;
@@ -326,6 +386,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.drawing)).EndInit();
             this.menuStrip.ResumeLayout(false);
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -334,8 +396,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox drawing;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ContextMenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem отменитьToolStripMenuItem;
         private System.Windows.Forms.Ribbon ribbon1;
@@ -357,6 +417,13 @@
         private System.Windows.Forms.RibbonButton defaultWeight;
         private System.Windows.Forms.RibbonButton halfBoldWeight;
         private System.Windows.Forms.RibbonButton boldWeight;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel coordinate;
+        private System.Windows.Forms.VScrollBar vScrollBar;
+        private System.Windows.Forms.HScrollBar hScrollBar;
+        private System.Windows.Forms.RibbonPanel zoomPanel;
+        private System.Windows.Forms.RibbonButton zoomIn;
+        private System.Windows.Forms.RibbonButton zoomOut;
     }
 }
 
