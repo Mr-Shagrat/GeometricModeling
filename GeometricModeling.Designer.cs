@@ -50,6 +50,10 @@
             this.dashDotLine = new System.Windows.Forms.RibbonButton();
             this.dashDotDotLine = new System.Windows.Forms.RibbonButton();
             this.lineWeightBtn = new System.Windows.Forms.RibbonButton();
+            this.halfDefaultWeight = new System.Windows.Forms.RibbonButton();
+            this.defaultWeight = new System.Windows.Forms.RibbonButton();
+            this.halfBoldWeight = new System.Windows.Forms.RibbonButton();
+            this.boldWeight = new System.Windows.Forms.RibbonButton();
             ((System.ComponentModel.ISupportInitialize)(this.drawing)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -170,6 +174,8 @@
             this.lineBtn.DropDownItems.Add(this.straightLineBtn);
             this.lineBtn.DropDownItems.Add(this.dottedLineBtn);
             this.lineBtn.DropDownItems.Add(this.lineSettingsBtn);
+            this.lineBtn.Image = ((System.Drawing.Image)(resources.GetObject("lineBtn.Image")));
+            this.lineBtn.LargeImage = ((System.Drawing.Image)(resources.GetObject("lineBtn.LargeImage")));
             this.lineBtn.Name = "lineBtn";
             this.lineBtn.SmallImage = ((System.Drawing.Image)(resources.GetObject("lineBtn.SmallImage")));
             this.lineBtn.Text = "Линия";
@@ -251,11 +257,56 @@
             // 
             // lineWeightBtn
             // 
+            this.lineWeightBtn.DropDownItems.Add(this.halfDefaultWeight);
+            this.lineWeightBtn.DropDownItems.Add(this.defaultWeight);
+            this.lineWeightBtn.DropDownItems.Add(this.halfBoldWeight);
+            this.lineWeightBtn.DropDownItems.Add(this.boldWeight);
             this.lineWeightBtn.Image = ((System.Drawing.Image)(resources.GetObject("lineWeightBtn.Image")));
             this.lineWeightBtn.LargeImage = ((System.Drawing.Image)(resources.GetObject("lineWeightBtn.LargeImage")));
             this.lineWeightBtn.Name = "lineWeightBtn";
             this.lineWeightBtn.SmallImage = ((System.Drawing.Image)(resources.GetObject("lineWeightBtn.SmallImage")));
+            this.lineWeightBtn.Style = System.Windows.Forms.RibbonButtonStyle.DropDown;
             this.lineWeightBtn.Text = "Толщина линии";
+            // 
+            // halfDefaultWeight
+            // 
+            this.halfDefaultWeight.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.halfDefaultWeight.Image = ((System.Drawing.Image)(resources.GetObject("halfDefaultWeight.Image")));
+            this.halfDefaultWeight.LargeImage = ((System.Drawing.Image)(resources.GetObject("halfDefaultWeight.LargeImage")));
+            this.halfDefaultWeight.Name = "halfDefaultWeight";
+            this.halfDefaultWeight.SmallImage = ((System.Drawing.Image)(resources.GetObject("halfDefaultWeight.SmallImage")));
+            this.halfDefaultWeight.Text = "Тонкая линия";
+            this.halfDefaultWeight.Click += new System.EventHandler(this.halfDefaultWeight_Click);
+            // 
+            // defaultWeight
+            // 
+            this.defaultWeight.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.defaultWeight.Image = ((System.Drawing.Image)(resources.GetObject("defaultWeight.Image")));
+            this.defaultWeight.LargeImage = ((System.Drawing.Image)(resources.GetObject("defaultWeight.LargeImage")));
+            this.defaultWeight.Name = "defaultWeight";
+            this.defaultWeight.SmallImage = ((System.Drawing.Image)(resources.GetObject("defaultWeight.SmallImage")));
+            this.defaultWeight.Text = "Стандартная линия";
+            this.defaultWeight.Click += new System.EventHandler(this.defaultWeight_Click);
+            // 
+            // halfBoldWeight
+            // 
+            this.halfBoldWeight.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.halfBoldWeight.Image = ((System.Drawing.Image)(resources.GetObject("halfBoldWeight.Image")));
+            this.halfBoldWeight.LargeImage = ((System.Drawing.Image)(resources.GetObject("halfBoldWeight.LargeImage")));
+            this.halfBoldWeight.Name = "halfBoldWeight";
+            this.halfBoldWeight.SmallImage = ((System.Drawing.Image)(resources.GetObject("halfBoldWeight.SmallImage")));
+            this.halfBoldWeight.Text = "Полужирная линия";
+            this.halfBoldWeight.Click += new System.EventHandler(this.halfBoldWeight_Click);
+            // 
+            // boldWeight
+            // 
+            this.boldWeight.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.boldWeight.Image = ((System.Drawing.Image)(resources.GetObject("boldWeight.Image")));
+            this.boldWeight.LargeImage = ((System.Drawing.Image)(resources.GetObject("boldWeight.LargeImage")));
+            this.boldWeight.Name = "boldWeight";
+            this.boldWeight.SmallImage = ((System.Drawing.Image)(resources.GetObject("boldWeight.SmallImage")));
+            this.boldWeight.Text = "Жирная линия";
+            this.boldWeight.Click += new System.EventHandler(this.boldWeight_Click);
             // 
             // GeometricModeling
             // 
@@ -302,6 +353,10 @@
         private System.Windows.Forms.RibbonButton dashDotLine;
         private System.Windows.Forms.RibbonButton dashDotDotLine;
         private System.Windows.Forms.RibbonButton lineWeightBtn;
+        private System.Windows.Forms.RibbonButton halfDefaultWeight;
+        private System.Windows.Forms.RibbonButton defaultWeight;
+        private System.Windows.Forms.RibbonButton halfBoldWeight;
+        private System.Windows.Forms.RibbonButton boldWeight;
     }
 }
 

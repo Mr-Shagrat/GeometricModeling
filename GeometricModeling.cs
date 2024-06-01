@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GeometricModeling
-{//9 10 5 11 23 24 25
+{
     public partial class GeometricModeling : Form
     {
         public GeometricModeling()
@@ -137,6 +137,27 @@ namespace GeometricModeling
         {
             active_drawing = true;
             drawing.Cursor = Cursors.Cross;
+        }
+
+        private void halfDefaultWeight_Click(object sender, EventArgs e)
+        {
+            pen.Width = 0f;
+        }
+
+        private void defaultWeight_Click(object sender, EventArgs e)
+        {
+            pen.Width = 0.5f;
+
+        }
+
+        private void halfBoldWeight_Click(object sender, EventArgs e)
+        { 
+            pen.Width = 0.75f;
+        }
+
+        private void boldWeight_Click(object sender, EventArgs e)
+        {
+            pen.Width = 1f;
         }
     }
 }
