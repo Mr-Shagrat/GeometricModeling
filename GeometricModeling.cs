@@ -91,7 +91,6 @@ namespace GeometricModeling
                     }
                 }
                 drawing.Refresh();
-
             }
         }
 
@@ -251,5 +250,21 @@ namespace GeometricModeling
         }
         #endregion
 
+        private void lineBtn_DoubleClick(object sender, EventArgs e)
+        {
+            using (var setLine = new LineCoordinatesForm())
+            {
+                var result = setLine.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    Entities.Line line = new Entities.Line(setLine.firstPoint, setLine.secondPoint, pen);
+                    lines.Add(line);
+                    active_drawing = false;
+                    drawing.Cursor = Cursors.Default;
+                    ClickNum = 1;
+                }
+            }
+        }
     }
 }

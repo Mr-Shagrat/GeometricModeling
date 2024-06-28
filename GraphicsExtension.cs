@@ -40,6 +40,7 @@ namespace GeometricModeling
         public static void DrawLine(this System.Drawing.Graphics g, System.Drawing.Pen pen, Entities.Line line)
         {
             g.SetTransform();
+            //BresenhamAlgoritm.Bresenham4Line(g, pen, (int)line.StartPosition.X, (int)line.StartPosition.Y, (int)line.EndPosition.X, (int)line.EndPosition.Y);
             g.DrawLine(pen, line.StartPosition.ToPointF, line.EndPosition.ToPointF);
             g.ResetTransform();
         }

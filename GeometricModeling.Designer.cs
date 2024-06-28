@@ -169,6 +169,7 @@
             this.lineBtn.Name = "lineBtn";
             this.lineBtn.SmallImage = ((System.Drawing.Image)(resources.GetObject("lineBtn.SmallImage")));
             this.lineBtn.Text = "Линия";
+            this.lineBtn.DoubleClick += new System.EventHandler(this.lineBtn_DoubleClick);
             this.lineBtn.Click += new System.EventHandler(this.lineBtn_Click);
             // 
             // straightLineBtn
