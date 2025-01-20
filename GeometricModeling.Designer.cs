@@ -42,15 +42,15 @@
             this.straightLineBtn = new System.Windows.Forms.RibbonButton();
             this.dottedLineBtn = new System.Windows.Forms.RibbonButton();
             this.lineSettingsBtn = new System.Windows.Forms.RibbonButton();
+            this.circleBtn = new System.Windows.Forms.RibbonButton();
+            this.sqareBtn = new System.Windows.Forms.RibbonButton();
             this.lineTypeBtn = new System.Windows.Forms.RibbonButton();
             this.straightLine = new System.Windows.Forms.RibbonButton();
             this.dashLine = new System.Windows.Forms.RibbonButton();
             this.dashDotLine = new System.Windows.Forms.RibbonButton();
-            this.dashDotDotLine = new System.Windows.Forms.RibbonButton();
             this.lineWeightBtn = new System.Windows.Forms.RibbonButton();
             this.halfDefaultWeight = new System.Windows.Forms.RibbonButton();
             this.defaultWeight = new System.Windows.Forms.RibbonButton();
-            this.halfBoldWeight = new System.Windows.Forms.RibbonButton();
             this.boldWeight = new System.Windows.Forms.RibbonButton();
             this.zoomPanel = new System.Windows.Forms.RibbonPanel();
             this.zoomIn = new System.Windows.Forms.RibbonButton();
@@ -86,12 +86,12 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.отменитьToolStripMenuItem});
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(164, 36);
+            this.menuStrip.Size = new System.Drawing.Size(147, 28);
             // 
             // отменитьToolStripMenuItem
             // 
             this.отменитьToolStripMenuItem.Name = "отменитьToolStripMenuItem";
-            this.отменитьToolStripMenuItem.Size = new System.Drawing.Size(163, 32);
+            this.отменитьToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
             this.отменитьToolStripMenuItem.Text = "Отменить";
             this.отменитьToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
             // 
@@ -119,7 +119,7 @@
             this.ribbon1.QuickAccessToolbar.Items.Add(this.ribbonButton2);
             this.ribbon1.QuickAccessToolbar.Visible = false;
             this.ribbon1.RibbonTabFont = new System.Drawing.Font("Trebuchet MS", 9F);
-            this.ribbon1.Size = new System.Drawing.Size(2063, 151);
+            this.ribbon1.Size = new System.Drawing.Size(1924, 151);
             this.ribbon1.TabIndex = 5;
             this.ribbon1.Tabs.Add(this.ribbonTab1);
             this.ribbon1.Text = "ribbon1";
@@ -154,6 +154,8 @@
             this.drawPanel.ButtonMoreEnabled = false;
             this.drawPanel.ButtonMoreVisible = false;
             this.drawPanel.Items.Add(this.lineBtn);
+            this.drawPanel.Items.Add(this.circleBtn);
+            this.drawPanel.Items.Add(this.sqareBtn);
             this.drawPanel.Items.Add(this.lineTypeBtn);
             this.drawPanel.Items.Add(this.lineWeightBtn);
             this.drawPanel.Name = "drawPanel";
@@ -193,12 +195,30 @@
             this.lineSettingsBtn.Name = "lineSettingsBtn";
             this.lineSettingsBtn.SmallImage = ((System.Drawing.Image)(resources.GetObject("lineSettingsBtn.SmallImage")));
             // 
+            // circleBtn
+            // 
+            this.circleBtn.Image = ((System.Drawing.Image)(resources.GetObject("circleBtn.Image")));
+            this.circleBtn.LargeImage = ((System.Drawing.Image)(resources.GetObject("circleBtn.LargeImage")));
+            this.circleBtn.Name = "circleBtn";
+            this.circleBtn.SmallImage = ((System.Drawing.Image)(resources.GetObject("circleBtn.SmallImage")));
+            this.circleBtn.Text = "Круг";
+            this.circleBtn.DoubleClick += new System.EventHandler(this.circleBtn_DoubleClick);
+            this.circleBtn.Click += new System.EventHandler(this.circleBtn_Click);
+            // 
+            // sqareBtn
+            // 
+            this.sqareBtn.Image = ((System.Drawing.Image)(resources.GetObject("sqareBtn.Image")));
+            this.sqareBtn.LargeImage = ((System.Drawing.Image)(resources.GetObject("sqareBtn.LargeImage")));
+            this.sqareBtn.Name = "sqareBtn";
+            this.sqareBtn.SmallImage = ((System.Drawing.Image)(resources.GetObject("sqareBtn.SmallImage")));
+            this.sqareBtn.Text = "Прямоугольник";
+            this.sqareBtn.Click += new System.EventHandler(this.sqareBtn_Click);
+            // 
             // lineTypeBtn
             // 
             this.lineTypeBtn.DropDownItems.Add(this.straightLine);
             this.lineTypeBtn.DropDownItems.Add(this.dashLine);
             this.lineTypeBtn.DropDownItems.Add(this.dashDotLine);
-            this.lineTypeBtn.DropDownItems.Add(this.dashDotDotLine);
             this.lineTypeBtn.Image = ((System.Drawing.Image)(resources.GetObject("lineTypeBtn.Image")));
             this.lineTypeBtn.LargeImage = ((System.Drawing.Image)(resources.GetObject("lineTypeBtn.LargeImage")));
             this.lineTypeBtn.Name = "lineTypeBtn";
@@ -236,21 +256,10 @@
             this.dashDotLine.Text = "Пунктирная с точкой";
             this.dashDotLine.Click += new System.EventHandler(this.dashDotLine_Click);
             // 
-            // dashDotDotLine
-            // 
-            this.dashDotDotLine.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
-            this.dashDotDotLine.Image = ((System.Drawing.Image)(resources.GetObject("dashDotDotLine.Image")));
-            this.dashDotDotLine.LargeImage = ((System.Drawing.Image)(resources.GetObject("dashDotDotLine.LargeImage")));
-            this.dashDotDotLine.Name = "dashDotDotLine";
-            this.dashDotDotLine.SmallImage = ((System.Drawing.Image)(resources.GetObject("dashDotDotLine.SmallImage")));
-            this.dashDotDotLine.Text = "Пунктир точка точка";
-            this.dashDotDotLine.Click += new System.EventHandler(this.dashDotDotLine_Click);
-            // 
             // lineWeightBtn
             // 
             this.lineWeightBtn.DropDownItems.Add(this.halfDefaultWeight);
             this.lineWeightBtn.DropDownItems.Add(this.defaultWeight);
-            this.lineWeightBtn.DropDownItems.Add(this.halfBoldWeight);
             this.lineWeightBtn.DropDownItems.Add(this.boldWeight);
             this.lineWeightBtn.Image = ((System.Drawing.Image)(resources.GetObject("lineWeightBtn.Image")));
             this.lineWeightBtn.LargeImage = ((System.Drawing.Image)(resources.GetObject("lineWeightBtn.LargeImage")));
@@ -278,16 +287,6 @@
             this.defaultWeight.SmallImage = ((System.Drawing.Image)(resources.GetObject("defaultWeight.SmallImage")));
             this.defaultWeight.Text = "Стандартная линия";
             this.defaultWeight.Click += new System.EventHandler(this.defaultWeight_Click);
-            // 
-            // halfBoldWeight
-            // 
-            this.halfBoldWeight.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
-            this.halfBoldWeight.Image = ((System.Drawing.Image)(resources.GetObject("halfBoldWeight.Image")));
-            this.halfBoldWeight.LargeImage = ((System.Drawing.Image)(resources.GetObject("halfBoldWeight.LargeImage")));
-            this.halfBoldWeight.Name = "halfBoldWeight";
-            this.halfBoldWeight.SmallImage = ((System.Drawing.Image)(resources.GetObject("halfBoldWeight.SmallImage")));
-            this.halfBoldWeight.Text = "Полужирная линия";
-            this.halfBoldWeight.Click += new System.EventHandler(this.halfBoldWeight_Click);
             // 
             // boldWeight
             // 
@@ -331,9 +330,9 @@
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.coordinate});
-            this.statusStrip.Location = new System.Drawing.Point(0, 1106);
+            this.statusStrip.Location = new System.Drawing.Point(0, 1015);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(2063, 40);
+            this.statusStrip.Size = new System.Drawing.Size(1924, 40);
             this.statusStrip.TabIndex = 6;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -345,7 +344,7 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.coordinate.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.coordinate.Name = "coordinate";
-            this.coordinate.Size = new System.Drawing.Size(250, 33);
+            this.coordinate.Size = new System.Drawing.Size(250, 34);
             this.coordinate.Text = "0.000, 0.000, 0.000";
             // 
             // vScrollBar
@@ -370,9 +369,9 @@
             // 
             // GeometricModeling
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2063, 1146);
+            this.ClientSize = new System.Drawing.Size(1924, 1055);
             this.ContextMenuStrip = this.menuStrip;
             this.Controls.Add(this.hScrollBar);
             this.Controls.Add(this.vScrollBar);
@@ -412,11 +411,9 @@
         private System.Windows.Forms.RibbonButton straightLine;
         private System.Windows.Forms.RibbonButton dashLine;
         private System.Windows.Forms.RibbonButton dashDotLine;
-        private System.Windows.Forms.RibbonButton dashDotDotLine;
         private System.Windows.Forms.RibbonButton lineWeightBtn;
         private System.Windows.Forms.RibbonButton halfDefaultWeight;
         private System.Windows.Forms.RibbonButton defaultWeight;
-        private System.Windows.Forms.RibbonButton halfBoldWeight;
         private System.Windows.Forms.RibbonButton boldWeight;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel coordinate;
@@ -425,6 +422,9 @@
         private System.Windows.Forms.RibbonPanel zoomPanel;
         private System.Windows.Forms.RibbonButton zoomIn;
         private System.Windows.Forms.RibbonButton zoomOut;
+        private System.Windows.Forms.RibbonButton circleBtn;
+        private System.Windows.Forms.RibbonButton sqareBtn;
+        private System.Windows.Forms.RibbonPanel lineType;
     }
 }
 

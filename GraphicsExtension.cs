@@ -44,5 +44,29 @@ namespace GeometricModeling
             g.DrawLine(pen, line.StartPosition.ToPointF, line.EndPosition.ToPointF);
             g.ResetTransform();
         }
+
+
+        public static void DrawCircle(this System.Drawing.Graphics g, System.Drawing.Pen pen, Entities.Circle circle)
+        {
+            float x = (float)(circle.Center.X - circle.Radius);
+            float y = (float)(circle.Center.Y - circle.Radius);
+            float d = (float)circle.Diameter;
+
+            g.SetTransform();
+            g.DrawEllipse(pen, x, y, d, d);
+            g.ResetTransform();
+        }
+
+        public static void DrawRect(this System.Drawing.Graphics g, System.Drawing.Pen pen, Entities.Rect rect)
+        {
+            float x = (float)Math.Min(rect.FirstPosition.X, rect.SecondPosition.X);
+            float y = (float)Math.Min(rect.FirstPosition.Y, rect.SecondPosition.Y);
+            float w = (float)Math.Abs(rect.FirstPosition.X - rect.SecondPosition.X);
+            float h = (float)Math.Abs(rect.FirstPosition.Y - rect.SecondPosition.Y);
+
+            g.SetTransform();
+            g.DrawRectangle(pen, x, y, w, h);
+            g.ResetTransform();
+        }
     }
 }

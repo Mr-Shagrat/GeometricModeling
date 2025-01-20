@@ -25,13 +25,16 @@ namespace GeometricModeling
         private System.Drawing.Point firstCorner;
         private List<Entities.Point> points = new List<Entities.Point>();
         private List<Entities.Line> lines = new List<Entities.Line>();
+        private List<Entities.Circle> circles = new List<Entities.Circle>();
+        private List<Entities.Rect> rects = new List<Entities.Rect>();
         private Vector currentPosition;
         private Vector firstPoint;
+        private int DrawingIndex = -1;
         private int ClickNum = 1;
         private int ClickZoom = 1;
         private bool active_drawing = false;
         private bool active_zoom = false;
-        private Pen pen = new Pen(Color.Black, 0);
+        private Pen pen = new Pen(Color.Black, 0.2f * (96 / 25.4f));
         private float XScroll;
         private float YScroll;
         private float ScaleFactor = 1.0f;
@@ -78,15 +81,46 @@ namespace GeometricModeling
                 }
                 if (active_drawing && !active_zoom)
                 {
-                    switch (ClickNum)
+                    switch(DrawingIndex)
                     {
                         case 1:
-                            firstPoint = currentPosition;
-                            ClickNum++;
+                            switch (ClickNum)
+                            {
+                                case 1:
+                                    firstPoint = currentPosition;
+                                    ClickNum++;
+                                    break;
+                                case 2:
+                                    lines.Add(new Entities.Line(firstPoint, currentPosition, pen));
+                                    cancel();
+                                    break;
+                            }
                             break;
-                        case 2:
-                            lines.Add(new Entities.Line(firstPoint, currentPosition, pen));
-                            firstPoint = currentPosition;
+                        case 2: switch(ClickNum)
+                            {
+                                case 1:
+                                    firstPoint = currentPosition;
+                                    ClickNum++;
+                                    break;
+                                case 2:
+                                    double radius = firstPoint.DistanceForm(currentPosition);
+                                    circles.Add(new Entities.Circle(firstPoint, radius, pen));
+                                    cancel();
+                                    break;
+
+                            }
+                            break;
+                        case 3: switch(ClickNum)
+                            {
+                                case 1:
+                                    firstPoint = currentPosition;
+                                    ClickNum++;
+                                    break;
+                                case 2:
+                                    rects.Add(new Entities.Rect(firstPoint, currentPosition, pen));
+                                    cancel();
+                                    break;
+                            }
                             break;
                     }
                 }
@@ -110,13 +144,46 @@ namespace GeometricModeling
                 }
             }
 
+            if (circles.Count > 0)
+            {
+                foreach (Entities.Circle c in circles)
+                {
+                    e.Graphics.DrawCircle(c.Pen, c);
+                }
+            }
+
+            if (rects.Count > 0)
+            {
+                foreach (Entities.Rect r in rects)
+                {
+                    e.Graphics.DrawRect(r.Pen, r);
+                }
+            }
+
             //lines 
 
-                    if (ClickNum == 2)
-                    {
+            if (ClickNum == 2)
+             {
+                switch(DrawingIndex)
+                {
+                    case 1:
                         Entities.Line line = new Entities.Line(firstPoint, currentPosition, pen);
                         e.Graphics.DrawLine(extpen, line);
-                    }
+                        break;
+                    case 2:
+                        Entities.Line l = new Entities.Line(firstPoint, currentPosition, pen);
+                        e.Graphics.DrawLine(extpen, l);
+                        double radius = firstPoint.DistanceForm(currentPosition);
+                        Entities.Circle circle = new Entities.Circle(firstPoint, radius, pen);
+                        e.Graphics.DrawCircle(extpen, circle);
+                        break;
+                    case 3:
+                        Entities.Rect rect = new Entities.Rect(firstPoint, currentPosition, pen);
+                        e.Graphics.DrawRect(extpen, rect);
+                        break;
+                }
+                
+             }
        
         }
 
@@ -143,15 +210,14 @@ namespace GeometricModeling
         #region cancel btn
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            active_drawing = false;
-            drawing.Cursor = Cursors.Default;
-            ClickNum = 1;
+            cancel();
         }
         #endregion
 
         #region line btn
         private void lineBtn_Click(object sender, EventArgs e)
         {
+            DrawingIndex = 1;
             active_drawing = true;
             drawing.Cursor = Cursors.Cross;
         }
@@ -172,33 +238,22 @@ namespace GeometricModeling
         {
             pen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
         }
-
-        private void dashDotDotLine_Click(object sender, EventArgs e)
-        {
-            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
-        }
         #endregion
 
         #region line width
         private void halfDefaultWeight_Click(object sender, EventArgs e)
         {
-            pen.Width = 0f;
+            pen.Width = 0f * (96 / 25.4f);
         }
 
         private void defaultWeight_Click(object sender, EventArgs e)
         {
-            pen.Width = 0.5f;
-
-        }
-
-        private void halfBoldWeight_Click(object sender, EventArgs e)
-        { 
-            pen.Width = 0.75f;
+            pen.Width = 0.2f * (96 / 25.4f);
         }
 
         private void boldWeight_Click(object sender, EventArgs e)
         {
-            pen.Width = 1f;
+            pen.Width = 0.4f * (96 / 25.4f);
         }
         #endregion
 
@@ -265,6 +320,34 @@ namespace GeometricModeling
                     ClickNum = 1;
                 }
             }
+        }
+
+        private void circleBtn_Click(object sender, EventArgs e)
+        {
+
+            DrawingIndex = 2;
+            active_drawing = true;
+            drawing.Cursor = Cursors.Cross;
+        }
+
+        private void cancel()
+        {
+            active_drawing = false;
+            drawing.Cursor = Cursors.Default;
+            ClickNum = 1;
+            DrawingIndex = -1;
+        }
+
+        private void circleBtn_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sqareBtn_Click(object sender, EventArgs e)
+        {
+            DrawingIndex = 3;
+            active_drawing = true;
+            drawing.Cursor = Cursors.Cross;
         }
     }
 }

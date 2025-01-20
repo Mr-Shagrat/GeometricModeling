@@ -54,5 +54,13 @@ namespace GeometricModeling
         {
             get { return new Vector(0.0, 0.0, 0.0);}
         }
+
+        public double DistanceForm(Vector v) {
+            double dx = v.X - X;
+            double dy = v.Y - Y;
+            double dz = v.Z- Z;
+
+            return Math.Sqrt(dx * dx  + dy * dy + dz * dz);
+        }
     }
 }
